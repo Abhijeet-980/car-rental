@@ -17,28 +17,32 @@ import {
 } from "lucide-react";
 
 const Footer = () => {
-  // State to manage newsletter email input
+  // -------------------- State Variables --------------------
+  // State to manage the email input value for newsletter subscription
   const [email, setEmail] = useState("");
-  // State to check if user has subscribed
+  // State to check whether the user has successfully subscribed
   const [isSubscribed, setIsSubscribed] = useState(false);
 
-  // Framer-motion animation variants for fade in and slide up
+  // -------------------- Animation Variants --------------------
+  // Framer Motion animation variant for fade-in with upward movement
   const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
+    initial: { opacity: 0, y: 20 }, // Initial state: invisible and slightly lower
+    whileInView: { opacity: 1, y: 0 }, // Animate to: visible and in place
+    viewport: { once: true }, // Animate only once when in viewport
   };
 
+  // -------------------- Event Handlers --------------------
   // Handle newsletter form submission
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent page refresh on submit
     if (email) {
-      setIsSubscribed(true); // Show success icon
-      setEmail(""); // Clear input field
+      setIsSubscribed(true); // Show success icon after subscription
+      setEmail(""); // Clear the input field for new entries
     }
   };
 
-  // Social media links and hover colors
+  // -------------------- Social Media Links --------------------
+  // Array of social media links and associated hover colors
   const socialLinks = [
     { Icon: Facebook, href: "#", color: "hover:bg-blue-600" },
     { Icon: Twitter, href: "#", color: "hover:bg-blue-400" },
@@ -46,7 +50,8 @@ const Footer = () => {
     { Icon: Linkedin, href: "#", color: "hover:bg-blue-700" },
   ];
 
-  // Footer quick navigation links
+  // -------------------- Quick Links --------------------
+  // Footer navigation links for quick access to main pages
   const quickLinks = [
     { label: "Home", path: "/" },
     { label: "About Us", path: "/about" },
@@ -55,18 +60,21 @@ const Footer = () => {
     { label: "Contact Us", path: "/contact" },
   ];
 
-  // Working hours information
+  // -------------------- Working Hours --------------------
+  // Array representing the company's working hours for display
   const workingHours = [
     { day: "Mon - Fri", hours: "9:00AM - 9:00PM" },
     { day: "Saturday", hours: "9:00AM - 7:00PM" },
     { day: "Sunday", hours: "10:00AM - 6:00PM" },
   ];
 
+  // -------------------- Footer JSX --------------------
   return (
     <footer className="bg-gray-50 dark:bg-zinc-950 text-gray-600 dark:text-zinc-400 pt-16 pb-8 relative overflow-hidden transition-colors duration-300 border-t border-gray-200 dark:border-zinc-900">
-      {/* Background Pattern */}
+      {/* -------------------- Background Pattern -------------------- */}
       <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5 dark:opacity-10 pointer-events-none"></div>
 
+      {/* -------------------- Container -------------------- */}
       <div className="container mx-auto px-4 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           
@@ -77,6 +85,8 @@ const Footer = () => {
             whileInView="whileInView"
             viewport={{ once: true }}
             className="space-y-6">
+            
+            {/* Logo with link to homepage */}
             <Link to="/" className="flex items-center space-x-2 group">
               <Car className="w-8 h-8 text-orange-500 group-hover:scale-110 transition-transform" />
               <span className="text-2xl font-bold">
@@ -84,21 +94,24 @@ const Footer = () => {
                 <span className="text-orange-500">Rental</span>
               </span>
             </Link>
+
+            {/* Company description */}
             <p className="leading-relaxed">
               Your trusted partner for car rentals. Experience premium service
               with unlimited miles and flexible pick-up options at unbeatable
               prices.
             </p>
-            {/* Social Media Icons */}
+
+            {/* -------------------- Social Media Icons -------------------- */}
             <div className="flex space-x-4">
               {socialLinks.map(({ Icon, href, color }, index) => (
                 <motion.a
                   key={index}
-                  href={href}
-                  target="_blank"
+                  href={href} // Social media URL
+                  target="_blank" // Open in new tab
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.1 }} // Hover animation
+                  whileTap={{ scale: 0.9 }} // Click animation
                   className={`w-10 h-10 rounded-lg bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 flex items-center justify-center
                            ${color} hover:text-white transition-all duration-300 shadow-sm`}>
                   <Icon className="w-5 h-5" />
@@ -121,7 +134,7 @@ const Footer = () => {
                   {/* Link scrolls to top on click */}
                   <Link
                     to={link.path}
-                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} // Scroll to top
                     className="group hover:text-orange-500 transition-colors inline-flex items-center space-x-2">
                     <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                     <span>{link.label}</span>
@@ -152,20 +165,26 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-            {/* Contact Info */}
+
+            {/* -------------------- Contact Info -------------------- */}
             <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-zinc-800">
+              {/* Phone number */}
               <div className="flex items-center space-x-3 group cursor-pointer">
                 <Phone className="w-5 h-5 text-orange-500 group-hover:rotate-12 transition-transform" />
                 <span className="hover:text-orange-500 transition-colors">
                   +1 234 567 8900
                 </span>
               </div>
+
+              {/* Email address */}
               <div className="flex items-center space-x-3 group cursor-pointer">
                 <Mail className="w-5 h-5 text-orange-500 group-hover:scale-110 transition-transform" />
                 <span className="hover:text-orange-500 transition-colors">
                   info@carrental.com
                 </span>
               </div>
+
+              {/* Physical address */}
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-orange-500" />
                 <span>123 Car Street, Auto City, AC 12345</span>
@@ -184,12 +203,14 @@ const Footer = () => {
             <p className="text-gray-500 dark:text-zinc-400">
               Subscribe to our newsletter for the latest updates and exclusive offers.
             </p>
+
+            {/* Newsletter Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="relative">
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={email} // Controlled input value
+                  onChange={(e) => setEmail(e.target.value)} // Update state on change
                   placeholder="Enter your email"
                   className="w-full px-4 py-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg focus:outline-none focus:ring-2 
                            focus:ring-orange-500 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-zinc-600 transition-all shadow-sm"
@@ -199,6 +220,7 @@ const Footer = () => {
                   className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-orange-500 
                            text-white rounded-lg hover:bg-orange-600 transition-all
                            hover:scale-105 active:scale-95 shadow-lg shadow-orange-500/20">
+                  {/* Show check icon if subscribed, send icon otherwise */}
                   {isSubscribed ? (
                     <CheckCircle className="w-5 h-5" />
                   ) : (
@@ -208,7 +230,7 @@ const Footer = () => {
               </div>
             </form>
 
-            {/* Special Offer Banner */}
+            {/* -------------------- Special Offer Banner -------------------- */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -232,6 +254,7 @@ const Footer = () => {
           whileInView="whileInView"
           viewport={{ once: true }}
           className="mt-16 pt-8 border-t border-gray-200 dark:border-zinc-800 text-center">
+          {/* Copyright Text */}
           <p className="text-gray-500 dark:text-zinc-500 text-sm">
             © {new Date().getFullYear()} CarRental. All rights reserved. Built
             with ❤️ for a better car rental experience.
